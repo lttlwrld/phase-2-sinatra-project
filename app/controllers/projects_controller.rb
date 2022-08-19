@@ -12,11 +12,12 @@ class ProjectsController < ApplicationController
         if logged_in?
             @project = Project.create(name: params["name"], proj_type: params["proj_type"], description: params["description"], user_id: current_user.id) 
             if params["new_developer"] == ""
-                @project.developer = Developer.find_by(name: params[:developer])
+                @project.developer = Developer.find_by(params[:developer])
             else
                 @project.developer = Developer.find_or_create_by(name: params["new_developer"])
             end
             @project.save
+            binding.pry
             if @project.id == nil
                 redirect '/projects/new'
             else
@@ -44,7 +45,7 @@ class ProjectsController < ApplicationController
         @project = Project.find(params[:id])
         if current_user.id == @project.user.id
             if params["new_developer"] == ""
-                @project.developer = Developer.find_by(name: params[:developer])
+                @project.developer = Developer.find_by(params[:developer])
             else
                 @project.developer = Developer.find_or_create_by(name: params["new_developer"])
             end
