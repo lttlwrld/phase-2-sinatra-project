@@ -1,0 +1,27 @@
+<h2>New Project</h2>
+
+<form action="/project/new" method="post">
+    <br>Name: <input type="text" name="name" id="name"><br>
+    <br>
+    <label for="developer">Developer:</label>
+    <select name="developer">
+        <option selected value='New'></option>
+        <% Developer.all.each do |dev| %>
+            <option value="<%= dev.name %>"><%= dev.name %></option>
+        <% end %>
+    </select>
+    <br>
+    <br>Create New Developer: <input type="text" name="new_developer" id="new_developer"><br>
+    <br>
+    <label for="proj_type">Type:</label>
+    <select name="proj_type">
+        <option selected disabled hidden style='display: none' value=''></option>
+        <option value="Commercial">Commercial</option>
+        <option value="Single-Family">Single-Family</option>
+        <option value="Multi-Family">Multi-Family</option>
+        <option value="Mixed-Use">Mixed-Use</option>
+    </select>
+    <br>
+    <br>Description: <input type="text" name="name" id="name"><br>
+    <br><input type="submit" id="submit "value="Create Project">
+</form>
