@@ -36,6 +36,8 @@ class UsersController < ApplicationController
             if user.authenticate(params[:password])
                 session[:user_id] = user.id
                 redirect "/#{current_user.slug}"
+            else
+                redirect to '/login'
             end
         else
             redirect to '/login'
