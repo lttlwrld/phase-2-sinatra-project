@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.string "name"
     t.integer "user_id"
     t.integer "developer_id"
-    t.string "type"
+    t.string "proj_type"
     t.string "description"
   end
 
