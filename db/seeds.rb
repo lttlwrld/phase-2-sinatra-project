@@ -5,7 +5,7 @@
 @dev4 = Developer.create(name: "Billingsley Company")
 Project.create(name: "Legacy West", user_id: @user.id, developer_id: @dev1.id, proj_type: "Mixed-Use", description: "This is a generic description of a development project.")
 Project.create(name: "North Fields", user_id: @user.id, developer_id: @dev1.id, proj_type: "Mixed-Use", description: "This is a generic description of a development project.")
-Project.create(name: "The Domaine", user_id: @user.id, developer_id: @dev2.id, proj_type: "Mixed-Use", description: "This is a generic description of a development project.")
+Project.create(name: "The Domain", user_id: @user.id, developer_id: @dev2.id, proj_type: "Mixed-Use", description: "This is a generic description of a development project.")
 Project.create(name: "Tobin Estates", user_id: @user.id, developer_id: @dev3.id, proj_type: "Multi-Family", description: "This is a generic description of a development project.")
 Project.create(name: "Hastings End", user_id: @user.id, developer_id: @dev4.id, proj_type: "Multi-Family", description: "This is a generic description of a development project.")
 
