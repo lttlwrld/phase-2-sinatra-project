@@ -14,8 +14,12 @@ class ApplicationController < Sinatra::Base
 		end
 
 		def current_user
-			User.find(session[:user_id])
-		end
+      if logged_in?
+        User.find(session[:user_id])
+      else
+        nil
+      end
+    end
 	end
 
   get '/' do

@@ -1,7 +1,12 @@
 <h2><%= @user.name %></h2>
 
+<% if current_user == @user %>
+    <a href="/projects/new">Create a New Project</a>
+<% end %>
+
 <ul>
     <% @user.projects.each do |proj| %>
         <li><a href="/projects/<%= proj.id %>"><%= proj.name %></a> - <%= proj.developer.name %></li>
     <% end %>
 </ul>
+

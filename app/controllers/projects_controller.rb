@@ -10,15 +10,18 @@ class ProjectsController < ApplicationController
 
     post '/projects/new' do
         if logged_in?
-            if params[""] != ""
-                @project = Project.create(user_id: current_user.id)
-                redirect "/projects/#{@project.id}"
+            @project = Project.create(name: params["name"], proj_type: params["proj_type"], description: params["description"], user_id: current_user.id) 
+            if params["developer"] != ""
+                @project.developer = Developer.find(params[:developer])
             else
-                redirect '/projects/new'
+                @project.developer = Developer.find_or_create_by(name: params["new_developer"])
             end
+            @project.save
+            redirect "/projects/#{@project.id}"
         else
-            redirect '/login'
+            redirect '/projects/new'
         end
+        redirect '/login'
     end
 
     get '/projects/:id' do
@@ -26,5 +29,33 @@ class ProjectsController < ApplicationController
         erb :'projects/show'
     end
 
+    get '/projects/:id/edit' do
+        @project = Project.find(params[:id])
+        if current_user.id == @project.user.id
+            erb :'projects/edit'
+        else
+            redirect '/login'
+        end
+    end
+
+    patch '/projects/:id/edit' do
+        @project = Project.find(params[:id])
+        if current_user.id == @project.user.id
+            @project.update(name: params["name"], proj_type: params["proj_type"], description: params["description"], user_id: current_user.id) 
+            if params["developer"] != ""
+                @project.developer = Developer.find(params[:developer])
+            else
+                @project.developer = Developer.find_or_create_by(name: params["new_developer"])
+            end
+            @project.save
+            redirect "/projects/#{@project.id}"
+        else
+            erb :'projects/edit'
+        end
+        redirect '/login'
+    end
+
+    delete '/projects/:id/delete' do
+    end
 
 end

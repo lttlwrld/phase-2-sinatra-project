@@ -8,4 +8,6 @@
 <b>Description: </b><%= @project.description %>
 <br>
 <br>
-<a href="/delete">Delete Project</a> - <a href="/edit">Edit Project</a>
+<% if current_user == @project.user %>
+    <a href="/delete">Delete Project</a> - <a href="/projects/<%= @project.id %>/edit">Edit Project</a>
+<% end %>
