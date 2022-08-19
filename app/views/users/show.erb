@@ -1,1 +1,7 @@
 <h2><%= @user.name %></h2>
+
+<ul>
+    <% @user.projects.each do |proj| %>
+        <li><a href="/projects/<%= proj.id %>"><%= proj.name %></a> - <%= proj.developer.name %></li>
+    <% end %>
+</ul>
