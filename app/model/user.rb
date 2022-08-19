@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
     has_many :developers, through: :projects
     has_secure_password
 
+    validates :username, uniqueness: true
+    validates :email, uniqueness: true
+
     def slug
         self.username.gsub(" ", "-")
     end
