@@ -5,4 +5,9 @@
 <h4>Sign-Up today and show your portfolio to the entire world!</h4>
 <br>
 <br>
-<a href="/signup">Sign Up</a>   <a href="/login">Log In</a>
+
+<% if logged_in? %>
+    <a href="/<%= current_user.slug %>">Profile</a> - <a href="/logout">Log Out</a>
+<% else %>
+    <a href="/signup">Sign Up</a> - <a href="/login">Log In</a>
+<% end %>

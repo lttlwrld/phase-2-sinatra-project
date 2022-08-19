@@ -10,10 +10,10 @@
 <br>
 <% if current_user == @project.user %>
     <form action="/projects/<%= @project.id %>/edit">
-    <input type="submit" value="Edit Project" />
+        <input type="submit" value="Edit Project" />
     </form>
-    <form method="post" action="/projects/<%= @project.id %>/delete">
-    <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete Project">
+    <form action="/projects/<%= @project.id %>/delete" method="post">
+        <input id="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Project">
     </form>
 <% end %>

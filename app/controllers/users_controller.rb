@@ -9,12 +9,16 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        if params[:username] == "" || params[:email] == "" || params[:password] == ""
+        if params[:username] == "" || params[:email] == "" || params[:password] == "" || params[:name] == ""
             redirect to '/signup'
         else
             @user = User.create(params)
-            session[:user_id] = @user[:id]
-            redirect "/#{current_user.slug}"
+            if @user.id == nil
+                redirect to '/signup'
+            else
+                session[:user_id] = @user[:id]
+                redirect "/#{current_user.slug}"
+            end
         end
     end
 
@@ -27,10 +31,12 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        user = User.all.find {|user| user[:username] == params["username"]}
-        if user.authenticate(params[:password])
-            session[:user_id] = user.id
-            redirect "/#{current_user.slug}"
+        user = user = User.find_by(username: params[:username])
+        if user != nil
+            if user.authenticate(params[:password])
+                session[:user_id] = user.id
+                redirect "/#{current_user.slug}"
+            end
         else
             redirect to '/login'
         end

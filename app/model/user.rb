@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     has_many :developers, through: :projects
     has_secure_password
 
+    validates_presence_of :username, :name, :email, :password, :name
     validates :username, uniqueness: true
     validates :email, uniqueness: true
 

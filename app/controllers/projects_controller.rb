@@ -11,15 +11,17 @@ class ProjectsController < ApplicationController
     post '/projects/new' do
         if logged_in?
             @project = Project.create(name: params["name"], proj_type: params["proj_type"], description: params["description"], user_id: current_user.id) 
-            if params["developer"] != ""
-                @project.developer = Developer.find(params[:developer])
+            if params["new_developer"] == ""
+                @project.developer = Developer.find_by(name: params[:developer])
             else
                 @project.developer = Developer.find_or_create_by(name: params["new_developer"])
             end
             @project.save
-            redirect "/projects/#{@project.id}"
-        else
-            redirect '/projects/new'
+            if @project.id == nil
+                redirect '/projects/new'
+            else
+                redirect "/projects/#{@project.id}"
+            end
         end
         redirect '/login'
     end
@@ -41,16 +43,17 @@ class ProjectsController < ApplicationController
     patch '/projects/:id/edit' do
         @project = Project.find(params[:id])
         if current_user.id == @project.user.id
-            @project.update(name: params["name"], proj_type: params["proj_type"], description: params["description"], user_id: current_user.id) 
-            if params["developer"] != ""
-                @project.developer = Developer.find(params[:developer])
+            if params["new_developer"] == ""
+                @project.developer = Developer.find_by(name: params[:developer])
             else
                 @project.developer = Developer.find_or_create_by(name: params["new_developer"])
             end
-            @project.save
-            redirect "/projects/#{@project.id}"
-        else
-            erb :'projects/edit'
+            if !@project.save
+                redirect "/projects/#{@project.id}/edit"
+            else
+                @project.update(name: params["name"], proj_type: params["proj_type"], description: params["description"], user_id: current_user.id) 
+                redirect "/projects/#{@project.id}"
+            end
         end
         redirect '/login'
     end
