@@ -1,4 +1,4 @@
-<h2>New Project</h2>
+<h2>Create a New Project</h2>
 
 <form action="/projects/new" method="post">
     <br>Name: <input type="text" name="name" id="name"><br>
@@ -6,7 +6,7 @@
     <label for="developer">Developer:</label>
     <select name="developer">
         <option value=''>--Select or Create--</option>
-        <% Developer.all.each do |dev| %>
+        <% current_user.developers.uniq.each do |dev| %>
             <option value="<%= dev.id %>"><%= dev.name %></option>
         <% end %>
     </select>

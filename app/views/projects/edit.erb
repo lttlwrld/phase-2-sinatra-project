@@ -7,7 +7,7 @@
     <label for="developer">Developer:</label>
     <select name="developer">
         <option value=''>--Select or Create--</option>
-        <% Developer.all.each do |dev| %>
+        <% current_user.developers.uniq.each do |dev| %>
             <option value="<%= dev.id %>" <%='selected' if @project.developer.name == dev.name %> ><%= dev.name %></option>
         <% end %>
     </select>
