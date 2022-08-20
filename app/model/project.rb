@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
 
     validates_presence_of :name, :developer, :proj_type, :description
 
-    @@types = ["Commercial", "Single-Family", "Multi-Family", "Mixed-Use", "Other"]
+    @@types = ["Hotels/Hospitality", "Industrial", "Mixed-Use", "Multi-Family", "Office", "Retail", "Single-Family", "Special Purpose", "Other"]
 
     def self.types
         @@types
