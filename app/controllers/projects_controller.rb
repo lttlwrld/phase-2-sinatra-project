@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
                 @project.developer = Developer.find_or_create_by(name: params["new_developer"])
             end
             @project.save
-            binding.pry
             if @project.id == nil
                 redirect '/projects/new'
             else
