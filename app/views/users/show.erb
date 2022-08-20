@@ -1,12 +1,10 @@
 <h2><%= @user.name %></h2>
-
-<% if current_user == @user %>
-    <form action="/projects/new">
-        <input type="submit" value="New Project" />
-    </form>
-<% end %>
-
 <ul>
+    <% if current_user == @user %>
+        <form action="/projects/new">
+            <input type="submit" value="New Project" />
+        </form>
+    <% end %>
     <% @user.projects.each do |proj| %>
         <li><a href="/projects/<%= proj.id %>"><%= proj.name %></a> - <%= proj.developer.name %></li>
     <% end %>
