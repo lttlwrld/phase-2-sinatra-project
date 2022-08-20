@@ -58,6 +58,15 @@ class ProjectsController < ApplicationController
         redirect '/login'
     end
 
+    get '/projects/:id/delete' do
+        @project = Project.find(params[:id])
+        if current_user.id == @project.user.id
+            erb :'projects/delete'
+        else
+            redirect '/login'
+        end
+    end
+
     delete '/projects/:id/delete' do
         @project = Project.find(params[:id])
         if current_user = @project.user
